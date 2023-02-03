@@ -78,7 +78,7 @@ EXTRACT_DIR="/tmp"
 UNPACK_DIR="$EXTRACT_DIR/linux-x86_64"
 rm -rf "$UNPACK_DIR"
 mkdir -p "$EXTRACT_DIR"
-echo $(tar -xf "$DL_FILE" -C "$EXTRACT_DIR")
+tar -xf "$DL_FILE" -C "$EXTRACT_DIR"
 [ -f "$UNPACK_DIR/dnscrypt-proxy" ] || (echo "Error, download failed for binary in dir: $UNPACK_DIR"; exit 1)
 # Delete example files
 find "$UNPACK_DIR/." -type f -name 'example-*' -exec rm {} \;
