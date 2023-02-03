@@ -5,8 +5,8 @@
 set -Eeo pipefail
 
 ################################################################################
-# Uncomment this line to disable signiture verification and therefore installation of minisign
-SKIP_VERIFY=1
+# Uncomment line to disable signiture verification and skip installing minisign
+# SKIP_VERIFY=1
 # Location where dnscrypt-proxy folder+binary will be installed
 INSTALL_LOCATION="$HOME/Documents"
 ################################################################################
