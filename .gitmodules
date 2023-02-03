@@ -1,0 +1,3 @@
+[submodule "dnscrypt-proxy_config_generator"]
+	path = dnscrypt-proxy_config_generator
+	url = https://github.com/possiblynaught/dnscrypt-proxy_config_generator.git

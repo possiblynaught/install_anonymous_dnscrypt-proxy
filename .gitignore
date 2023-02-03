@@ -1,0 +1,20 @@
+# linux
+*~
+# temporary files
+.fuse_hidden*
+*.backup
+# KDE directory preferences
+.directory
+# trash folder
+.Trash-*
+# .nfs files
+.nfs*
+# vim swap
+.sw[a-p]
+.*.sw[a-p]
+# vim session
+Session.vim
+# temporary
+.netrwhist
+# auto-generated tag files
+tags
