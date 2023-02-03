@@ -85,7 +85,8 @@ find "$UNPACK_DIR/." -type f -name 'example-*' -exec rm {} \;
 
 # Generate toml
 TOML_FILE="$UNPACK_DIR/dnscrypt-proxy.toml"
-"$GEN_SCRIPT" && mv "/tmp/dnscrypt-proxy.toml" "$TOML_FILE"
+"$GEN_SCRIPT" || true # TODO: Fix this
+mv "/tmp/dnscrypt-proxy.toml" "$TOML_FILE"
 # Pull dns listen address from toml
 LISTEN_ADDRESS=$(grep -F "listen_addresses = " < "$TOML_FILE" | grep -vF "#" | cut -d "'" -f 2 | cut -d ":" -f 1)
 [ -n "$LISTEN_ADDRESS" ] || (echo "Error, unable to get listen_address from: $TOML_FILE"; exit 1)
