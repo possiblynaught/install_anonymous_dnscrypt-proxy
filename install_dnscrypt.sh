@@ -13,7 +13,7 @@ INSTALL_LOCATION="$HOME/Documents"
 
 # Save script dir
 SCRIPT_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd -P)
-GEN_SCRIPT="$SCRIPT_DIR/dnscrypt-proxy_config_generator/generate_anondns_and_odoh.sh"
+GEN_SCRIPT="$SCRIPT_DIR/dnscrypt-proxy_config_generator/generate_config.sh"
 
 # Check for linux version, expecting linux x86/64
 if ! uname -a | grep -q 'x86_64\|Linux'; then
@@ -85,7 +85,7 @@ find "$UNPACK_DIR/." -type f -name 'example-*' -exec rm {} \;
 
 # Generate toml
 TOML_FILE="$UNPACK_DIR/dnscrypt-proxy.toml"
-"$GEN_SCRIPT" "$TOML_FILE"
+"$GEN_SCRIPT" && mv "/tmp/dnscrypt-proxy.toml" "$TOML_FILE"
 # Pull dns listen address from toml
 LISTEN_ADDRESS=$(grep -F "listen_addresses = " < "$TOML_FILE" | grep -vF "#" | cut -d "'" -f 2 | cut -d ":" -f 1)
 [ -n "$LISTEN_ADDRESS" ] || (echo "Error, unable to get listen_address from: $TOML_FILE"; exit 1)
