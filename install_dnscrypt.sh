@@ -67,9 +67,26 @@ rm -f "$TEMP_DOWNLOAD"
 if [[ ! "$SKIP_VERIFY" -eq 1 ]]; then
   # Install minisign if not already present
   if ! command -v minisign &> /dev/null; then
-    sudo apt update; sudo apt install -y cmake build-essential
-  # TODO: Install libsodium
-  # TODO: Install minisign
+    INSTALL_MINISIGN="$SCRIPT_DIR/install_minisign/install_minisign.sh"
+    if [[ ! -x "$INSTALL_MINISIGN" ]]; then
+      echo "Error, executable minisign install script not found: $INSTALL_MINISIGN
+Make sure you have initialized the submodules with:
+  git submodule init
+  git submodule update"
+      exit 1
+    else
+      "${INSTALL_MINISIGN}"
+    fi
+  fi
+  # Check signature
+  SIG=$(minisign -VP RWTk1xXqcTODeYttYMCMLo0YJHaFEHn7a3akqHlb/7QvIQXHVPxKbjB5 -m "$DL_FILE")
+  if ! (echo "$SIG" | grep -qF "Signature and comment signature verified"); then
+    echo "Error, minisig verification of dnscrypt binary failed:
+$SIG"
+    exit 1
+  else
+    echo "Signature for binary verified successfully:
+  $DL_FILE"
   fi
 fi
 
@@ -79,6 +96,8 @@ UNPACK_DIR="$EXTRACT_DIR/linux-x86_64"
 rm -rf "$UNPACK_DIR"
 mkdir -p "$EXTRACT_DIR"
 tar -xf "$DL_FILE" -C "$EXTRACT_DIR"
+rm -f "$DL_FILE"
+rm -f "$DL_SIG_FILE"
 [ -f "$UNPACK_DIR/dnscrypt-proxy" ] || (echo "Error, download failed for binary in dir: $UNPACK_DIR"; exit 1)
 # Delete example files
 find "$UNPACK_DIR/." -type f -name 'example-*' -exec rm {} \;
