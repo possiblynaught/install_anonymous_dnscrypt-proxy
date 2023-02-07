@@ -9,17 +9,14 @@ This script will:
 2. Check for existing dnscrypt-proxy v1
 3. Check for existing dnscrypt-proxy v2
 4. Download dnscrypt-proxy2 tarball
-5. Build + install minisign if not installed and verify tarball with minisig
-   * Skip step *5* by uncommenting ***SKIP_VERIFY=1***
-6. Generate the dnscrypt-proxy.toml config with Anonymous DNS + ODoH routes exclusively
-   * Uses my [dnscrypt-proxy_config_generator](https://github.com/possiblynaught/dnscrypt-proxy_config_generator) as a submodule
+5. Build + install (statically linked) minisign if not installed and verify tarball with minisig. Skip this step by uncommenting ***SKIP_VERIFY=1***
+6. Generate the dnscrypt-proxy.toml config with Anonymous DNS + ODoH routes exclusively with [dnscrypt-proxy_config_generator](https://github.com/possiblynaught/dnscrypt-proxy_config_generator) submodule
 7. Makes a backup of /etc/resolv.conf -> /etc/resolv.conf.old and updates the file with the new *listen_addresses*
 8. Copy extracted dnscrypt binary/config to dir specified by variable: *INSTALL_LOCATION*, defaults to *$HOME/Documents/dnscrypt-proxy/*
 9. Installs and starts the dnscrypt-proxy service
-10. Tests DNS servers with my [minimal_dnsleaktest](https://github.com/possiblynaught/minimal_dnsleaktest) submodule
-   * Skip step *10* by uncommenting ***SKIP_DNSLEAKTEST=1***
+10. Tests DNS servers with [minimal_dnsleaktest](https://github.com/possiblynaught/minimal_dnsleaktest) submodule. Skip this step by uncommenting ***SKIP_DNSLEAKTEST=1***
 
-## USE
+## INSTALL
 
 To install and configure dnscrypt-proxy2, clone this repository, initialize the submodules, and trigger the install script:
 

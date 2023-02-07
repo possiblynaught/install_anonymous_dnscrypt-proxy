@@ -146,12 +146,13 @@ echo "
 ################################################################################
 Installation completed to directory: $FINAL_DIR
 The old version of the resolv file was saved to: $OLD_RESOLV_FILE
-If the internet connection doesn't work after this script, reset to old config with:
+If the network connection doesn't work after this script, reset resolv with:
   sudo mv $OLD_RESOLV_FILE $RESOLV_FILE
 ################################################################################"
 # Attempt dns leak test
 LEAK_SCRIPT="$SCRIPT_DIR/minimal_dnsleaktest/leaktest.sh"
-if [ "$SKIP_DNSLEAKTEST" -ne 1 ] && [ -x "$LEAK_SCRIPT" ]; then
-  echo "Testing DNS..."
+if [[ "$SKIP_DNSLEAKTEST" != 1 ]] && [ -x "$LEAK_SCRIPT" ]; then
+  echo -e "\nTesting DNS in 10 seconds..."
+  sleep 10
   "${LEAK_SCRIPT}"
 fi
