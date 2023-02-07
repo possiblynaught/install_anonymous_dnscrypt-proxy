@@ -4,3 +4,6 @@
 [submodule "install_minisign"]
 	path = install_minisign
 	url = https://github.com/possiblynaught/install_minisign.git
+[submodule "minimal_dnsleaktest"]
+	path = minimal_dnsleaktest
+	url = https://github.com/possiblynaught/minimal_dnsleaktest.git

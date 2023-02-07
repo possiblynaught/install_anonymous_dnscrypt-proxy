@@ -7,6 +7,8 @@ set -Eeo pipefail
 ################################################################################
 # Uncomment line to disable signiture verification and skip installing minisign
 # SKIP_VERIFY=1
+# Uncomment line to disable testing for dns leaks at end of install
+# SKIP_DNSLEAKTEST=1
 # Location where dnscrypt-proxy folder+binary will be installed
 INSTALL_LOCATION="$HOME/Documents"
 ################################################################################
@@ -147,3 +149,9 @@ The old version of the resolv file was saved to: $OLD_RESOLV_FILE
 If the internet connection doesn't work after this script, reset to old config with:
   sudo mv $OLD_RESOLV_FILE $RESOLV_FILE
 ################################################################################"
+# Attempt dns leak test
+LEAK_SCRIPT="$SCRIPT_DIR/minimal_dnsleaktest/leaktest.sh"
+if [ "$SKIP_DNSLEAKTEST" -ne 1 ] && [ -x "$LEAK_SCRIPT" ]; then
+  echo "Testing DNS..."
+  "${LEAK_SCRIPT}"
+fi
