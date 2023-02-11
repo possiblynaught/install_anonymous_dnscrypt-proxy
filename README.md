@@ -1,7 +1,6 @@
 # dnscrypt-proxy config generator
 
 Script to install dnscrypt-proxy 2 on linux targets from latest release, uses randomized Anonymous DNS and Oblivious DNS over HTTPS config by default.
-# TODO: FINISH targets
 
 ## INFO
 
@@ -10,7 +9,7 @@ This script will:
 2. Detect target architecture
 3. Check for existing dnscrypt-proxy
 4. Download dnscrypt-proxy 2 tarball
-5. Build + install (statically linked) minisign if not installed and verify tarball with minisig. Skip this step by uncommenting ***SKIP_VERIFY=1***
+5. Build + install (statically linked) minisign if not installed and verify tarball against minisig file. Uses the [install_minisign](https://github.com/possiblynaught/install_minisign) submodule, skip this step by uncommenting ***SKIP_VERIFY=1***
 6. Generate the dnscrypt-proxy.toml config with Anonymous DNS + ODoH routes exclusively with [dnscrypt-proxy_config_generator](https://github.com/possiblynaught/dnscrypt-proxy_config_generator) submodule
 7. Makes a backup of /etc/resolv.conf -> /etc/resolv.conf.old and updates the file with the new *listen_addresses*
 8. Copy extracted dnscrypt binary/config to dir specified by variable: *INSTALL_DIRECTORY*, defaults to */etc/dnscrypt-proxy/*
